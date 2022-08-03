@@ -27,7 +27,8 @@ jobs:
           script: |
             const { PROD, DEV, STAGE, GITHUB_REF } = process.env
             if (GITHUB_REF === 'refs/heads/main') {
-                return DEV
+                const temp = JSON.parse(DEV)
+                return {...temp, ...{"k3": 5}}
             } else if (GITHUB_REF.startsWith('refs/tags/v')) {
                 return PROD
             } else {
