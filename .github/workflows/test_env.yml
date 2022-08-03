@@ -17,8 +17,8 @@ jobs:
   set-env:
     runs-on: ubuntu-latest
     outputs:
-      k1: ${{ steps.set-result.outputs.k1 }}
-      k2: ${{ steps.set-result.outputs.k2 }}
+      k1: ${{ steps.set-output.outputs.k1 }}
+      k2: ${{ steps.set-output.outputs.k2 }}
     steps:
       - uses: actions/github-script@v6
         id: set-result
@@ -38,7 +38,8 @@ jobs:
               return STAGE
             }
           result-encoding: string
-      - run: |
+      - id: set-output
+        run: |
           echo "::set-output name=k1::${{ fromJSON(steps.set-result.outputs.result)['k1'] }}"
           echo "::set-output name=k2::${{ fromJSON(steps.set-result.outputs.result)['k2'] }}"
 
