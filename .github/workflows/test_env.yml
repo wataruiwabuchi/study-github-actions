@@ -25,7 +25,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: deployment 
-    environment: ${{ needs.deployment.outputs.env_name }}
     steps:
       - id: echo1
         run: echo ${{ needs.deployment.outputs.env_name }} | sed 's/./& /g'
