@@ -8,29 +8,30 @@ on:
       - v*
 
 env:
-  prod: '{"k1": "prod"}'
-  dev: '{"k1": "dev"}'
-  environment: 'dev'
+  prod: '{"k1": "prod", "k2": 1}'
+  dev: '{"k1": "dev", "k2": 2}'
+  stage: '{"k1": "stage", "k2": 3}'
 
 jobs:
-  deployment:
+  set-env:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/github-script@v6
         id: set-result
         env:
           PROD: ${{ env.prod }}
           DEV: ${{ env.dev }}
-          ENVIRONMENT: ${{ env.environment }}
+          STAGE: ${{ env.stage }}
+          GITHUB_REF: ${{ github.ref }}
         with:
           script: |
-            const { PROD, DEV, ENVIRONMENT } = process.env
-            switch (ENVIRONMENT) {
-              case 'prod':
-                return PROD
-              case 'dev':
+            const { PROD, DEV, STAGE, GITHUB_REF } = process.env
+            if (GITHUB_REF == 'ref/heads/main') {
                 return DEV
+            } else if (GITHUB_REF.startsWith('ref/tags/v')) {
+                return PROD
+            } else {
+              return STAGE
             }
           result-encoding: string
       - run: echo "${{steps.set-result.outputs.result}}"
