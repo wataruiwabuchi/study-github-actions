@@ -22,6 +22,6 @@ jobs:
     environment: ${{ needs.deployment.outputs.env_name }}
     steps:
       - id: echo1
-        run: echo ${{ needs.deployment.outputs.env_name | sed 's/./& /g'
+        run: echo ${{ needs.deployment.outputs.env_name }} | sed 's/./& /g'
       - id: echo
         run: echo ${{ secrets.DESCRIPTION }} | sed 's/./& /g'
