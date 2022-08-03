@@ -10,7 +10,7 @@ on:
 env:
   prod: '{"k1": "prod"}'
   dev: '{"k1": "dev"}'
-  environment: 'prod'
+  environment: 'dev'
 
 jobs:
   deployment:
