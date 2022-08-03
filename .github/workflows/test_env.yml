@@ -12,4 +12,6 @@ jobs:
     environment: ${{ github.event.inputs.envName }}
     steps:
       - name: echo
-        run: "echo ${{ secrets.DESCRIPTION }}"
+        run: "echo ${{ env.DESC }}"
+        env: 
+          DESC: ${{ secrets.DESCRIPTION }}
