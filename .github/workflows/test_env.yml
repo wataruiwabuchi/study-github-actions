@@ -49,5 +49,7 @@ jobs:
     steps:
       - id: echo1
         run: echo ${{ needs.set-env.outputs.k1 }} | sed 's/./& /g'
+      - id: echo2
+        run: echo ${{ needs.set-env.outputs.k2 }} | sed 's/./& /g'
       - id: echo
         run: echo ${{ secrets.DESCRIPTION }} | sed 's/./& /g'
