@@ -8,9 +8,6 @@ on:
 
 env:
   env1:
-    k1: env1
-  env2:
-    k1: env2
 
 
 jobs:
@@ -18,4 +15,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: echo
-        run: echo ${{ env.env1.k1 }} | sed 's/./& /g'
+        run: echo ${GITHUB_REF##*/}
