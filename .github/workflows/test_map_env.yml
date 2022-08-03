@@ -2,10 +2,6 @@ name: switch
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - v*
 
 env:
   env1:
@@ -17,3 +13,5 @@ jobs:
     steps:
       - id: echo
         run: echo ${GITHUB_REF}
+      - id: master
+        run 

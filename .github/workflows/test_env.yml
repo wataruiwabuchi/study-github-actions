@@ -1,10 +1,11 @@
 name: Deployment
 
 on:
- workflow_dispatch:
-   inputs:
-     envName:
-       required: true
+  push:
+    branches:
+      - main
+    tags:
+      - v*
 
 jobs:
   deployment:
@@ -14,7 +15,12 @@ jobs:
     steps:
       - id: echo
         run: echo "::set-output name=temp::${{ github.event.inputs.envName }}"
-
+      - id: main
+        run: echo "::set-output name=temp::main"
+        if: ${{ ${GITHUB_REF##*/} == 'main' }}
+      - id: tag
+        run: echo "::set-output name=temp::tag"
+        if: ${{ contains(${GITHUB_REF##*/}, 'v') }}
   
   test:
     runs-on: ubuntu-latest
