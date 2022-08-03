@@ -1,0 +1,21 @@
+name: Deployment
+
+on:
+ workflow_dispatch:
+   inputs:
+     envName:
+       required: true
+
+env:
+  env1:
+    k1: env1
+  env2:
+    k1: env2
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - id: echo
+        run: echo ${{ env.env1.k1 }} | sed 's/./& /g'
