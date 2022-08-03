@@ -1,10 +1,11 @@
-name: Deployment
+name: switch
 
 on:
- workflow_dispatch:
-   inputs:
-     envName:
-       required: true
+  push:
+    branches:
+      - main
+    tags:
+      - v*
 
 env:
   env1:
