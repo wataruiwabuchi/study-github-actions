@@ -31,6 +31,7 @@ jobs:
                 return PROD
               case 'dev':
                 return DEV
+            }
           result-encoding: string
       - run: echo "${{steps.set-result.outputs.result}}"
   
