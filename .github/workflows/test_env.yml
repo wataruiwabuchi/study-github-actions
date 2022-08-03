@@ -26,7 +26,6 @@ jobs:
         with:
           script: |
             const { PROD, DEV, STAGE, GITHUB_REF } = process.env
-            return GITHUB_REF === 'refs/heads/main'
             if (GITHUB_REF === 'refs/heads/main') {
                 return DEV
             } else if (GITHUB_REF.startsWith('refs/tags/v')) {
