@@ -13,8 +13,6 @@ jobs:
     outputs: 
       env_name: ${{ steps.echo.outputs.temp }}
     steps:
-      - id: echo
-        run: echo "::set-output name=temp::${{ github.event.inputs.envName }}"
       - id: main
         run: echo "::set-output name=temp::main"
         if: github.ref == 'refs/heads/main'
