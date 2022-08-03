@@ -27,14 +27,14 @@ jobs:
           script: |
             const { PROD, DEV, STAGE, GITHUB_REF } = process.env
             if (GITHUB_REF === 'refs/heads/main') {
-                return JSON.stringify({...JSON.parse(DEV), ...{"k3": 5}})
+              return JSON.stringify({...JSON.parse(DEV), ...{"k3": 5}})
             } else if (GITHUB_REF.startsWith('refs/tags/v')) {
-                return PROD
+              return PROD
             } else {
               return STAGE
             }
           result-encoding: string
-      - run: echo "${{steps.set-result.outputs.result}}"
+      - run: echo "${{ fromJSON(steps.set-result.outputs.result)['k1'] }}"
   
 #  test:
 #    runs-on: ubuntu-latest
