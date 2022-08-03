@@ -15,4 +15,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: echo
-        run: echo ${GITHUB_REF##*/}
+        run: echo ${GITHUB_REF}
