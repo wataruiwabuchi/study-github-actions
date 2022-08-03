@@ -12,4 +12,4 @@ jobs:
     environment: ${{ github.event.inputs.envName }}
     steps:
       - name: echo
-      - run: "echo ${{ secrets.DESCRIPTION }}
+      - run: "echo ${{ secrets.DESCRIPTION }}"
