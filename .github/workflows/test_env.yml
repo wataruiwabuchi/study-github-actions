@@ -53,3 +53,5 @@ jobs:
         run: echo ${{ needs.set-env.outputs.k2 }} | sed 's/./& /g'
       - id: echo
         run: echo ${{ secrets.DESCRIPTION }} | sed 's/./& /g'
+      - id: echo-env
+        run: echo ${{ env.prod }} | sed 's/./& /g'
