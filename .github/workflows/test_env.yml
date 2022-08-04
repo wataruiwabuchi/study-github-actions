@@ -12,6 +12,10 @@ env:
   prod: '{"k1": "prod", "k2": 1}'
   dev: '{"k1": "dev", "k2": 2}'
   stage: '{"k1": "stage", "k2": 3}'
+  temp: '{
+    "k1": "stage",
+    "k2": 3
+    }'
 
 jobs:
   set-env:
