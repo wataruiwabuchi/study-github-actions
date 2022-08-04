@@ -58,4 +58,4 @@ jobs:
       - id: echo
         run: echo ${{ secrets.DESCRIPTION }} | sed 's/./& /g'
       - id: echo-env
-        run: echo ${{ env.prod }} | sed 's/./& /g'
+        run: echo ${{ env.temp }} | sed 's/./& /g'
