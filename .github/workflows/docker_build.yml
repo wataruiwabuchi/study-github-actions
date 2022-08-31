@@ -1,0 +1,38 @@
+---
+# このワークフローはGitHubによって認定されていないアクションを使用します。
+# それらはサードパーティによって提供され、
+# 別個の利用規約、プライバシーポリシー、
+# サポートドキュメンテーションが適用されます。
+
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          tags: latest
+          build-args: |
+            TEST_ENV=test_value
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
+

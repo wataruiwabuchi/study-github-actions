@@ -19,4 +19,3 @@ jobs:
         uses: ./.github/actions/hello-world-docker-action
         with:
           who-to-greet: 'Mona the Octocat'
-
