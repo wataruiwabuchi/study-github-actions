@@ -8,48 +8,15 @@ name: Deployment
     tags:
       - v*
 
-env:
-  prod: '{"k1": "prod", "k2": 1}'
-  dev: '{"k1": "dev", "k2": 2}'
-  stage: '{"k1": "stage", "k2": 3}'
-
 jobs:
   set-env:
     runs-on: ubuntu-latest
-    outputs:
-      k1: ${{ steps.set-output.outputs.k1 }}
-      k2: ${{ steps.set-output.outputs.k2 }}
     steps:
-      - uses: actions/github-script@v6
-        id: set-result
-        env:
-          PROD: ${{ env.prod }}
-          DEV: ${{ env.dev }}
-          STAGE: ${{ env.stage }}
-          GITHUB_REF: ${{ github.ref }}
+      #- id: set-output
+      #  run: |
+      #    echo "test"
+      - name: run hello action
+        uses: ./.github/actions/hello-world-docker-action
         with:
-          script: |
-            const { PROD, DEV, STAGE, GITHUB_REF } = process.env
-            if (GITHUB_REF === 'refs/heads/main') {
-              return JSON.stringify({...JSON.parse(DEV), ...{"k3": 5}})
-            } else if (GITHUB_REF.startsWith('refs/tags/v')) {
-              return PROD
-            } else {
-              return STAGE
-            }
-          result-encoding: string
-      - id: set-output
-        run: |
-          echo "::set-output name=k1::${{ fromJSON(steps.set-result.outputs.result)['k1'] }}"
-          echo "::set-output name=k2::${{ fromJSON(steps.set-result.outputs.result)['k2'] }}"
+          who-to-greet: 'Mona the Octocat'
 
-  test:
-    runs-on: ubuntu-latest
-    needs: set-env
-    steps:
-      - id: echo1
-        run: echo ${{ needs.set-env.outputs.k1 }} | sed 's/./& /g'
-      - id: echo2
-        run: echo ${{ needs.set-env.outputs.k2 }} | sed 's/./& /g'
-      - id: echo
-        run: echo ${{ secrets.DESCRIPTION }} | sed 's/./& /g'
